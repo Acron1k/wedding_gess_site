@@ -49,42 +49,23 @@
   .content { position: relative; z-index: 1; flex: 1; display: flex; flex-direction: column; padding: var(--pad); }
 
   /* ---------- PAGE 1 ---------- */
-  .hero { align-items: center; justify-content: center; text-align: center; }
-  .eyebrow {
-    font-family: var(--body); font-size: 10.5px; letter-spacing: 0.5em; text-transform: uppercase;
-    color: var(--accent); margin-bottom: 8mm; padding-left: 0.5em;
-  }
-  .v-tick { width: 1px; height: 32px; background: var(--accent); opacity: 0.7; margin: 0 auto; }
+  .hero { align-items: stretch; justify-content: center; text-align: center; }
 
   .name {
-    font-family: var(--display); font-weight: 400; font-size: 46px; letter-spacing: 0.1em;
-    color: var(--ink); padding-left: 0.1em; margin: 5mm 0;
+    font-family: var(--display); font-weight: 400; font-size: 72px; letter-spacing: 0.03em;
+    color: var(--ink); margin: 0;
   }
+  .name-left  { text-align: left;  align-self: flex-start; margin-bottom: -6mm; }
+  .name-right { text-align: right; align-self: flex-end;   margin-top: -6mm; }
 
   .date-stack {
-    font-family: var(--display); font-weight: 400; font-size: 98px; line-height: 0.96;
-    letter-spacing: 0.04em; color: var(--ink); margin: 0;
+    font-family: var(--display); font-weight: 400; font-size: 122px; line-height: 0.94;
+    letter-spacing: 0.02em; color: var(--ink); margin: 0; text-align: center;
   }
   .date-stack span { display: block; }
 
-  .details { margin-top: 8mm; color: var(--ink-soft); }
-  .details .when {
-    font-family: var(--display); font-size: 23px; letter-spacing: 0.16em; text-transform: uppercase;
-    color: var(--accent); margin-bottom: 4mm; padding-left: 0.16em;
-  }
-  .details .place { font-size: 14px; letter-spacing: 0.04em; line-height: 1.75; }
-
-  .welcome {
-    font-family: var(--body); font-style: italic; font-weight: 400; font-size: 18px;
-    color: var(--ink-soft); margin-top: 9mm; max-width: 80%; line-height: 1.55;
-  }
-
-  .monogram { font-family: var(--display); font-weight: 400; letter-spacing: 0.18em; color: var(--accent); }
-  .hero .monogram { margin-top: 9mm; font-size: 23px; }
-  .hero .monogram .slash { opacity: 0.7; margin: 0 5px; }
-
   /* ---------- PAGE 2 ---------- */
-  .invite { align-items: center; text-align: center; justify-content: flex-start; padding-top: 12mm; }
+  .invite { align-items: center; text-align: center; justify-content: center; }
   .invite .monogram-top {
     font-family: var(--display); font-size: 19px; letter-spacing: 0.32em; color: var(--accent);
     margin-bottom: 8mm; padding-left: 0.32em;
@@ -128,7 +109,7 @@
 
   .closing {
     font-family: var(--display); font-weight: 400; font-size: 46px; letter-spacing: 0.04em;
-    color: var(--ink); margin-top: auto; padding-top: 10mm;
+    color: var(--ink); margin-top: 11mm;
   }
 
   /* ---------- screen chrome ---------- */
@@ -164,18 +145,9 @@
   <section class="sheet">
     <div class="frame"></div>
     <div class="content hero">
-      <div class="eyebrow" data-c="p1.eyebrow">Приглашение&nbsp;на&nbsp;свадьбу</div>
-      <div class="v-tick"></div>
-      <h1 class="name" data-c="p1.name1">Алексей</h1>
+      <h1 class="name name-left" data-c="p1.name1">Алексей</h1>
       <div class="date-stack"><span data-c="p1.dd">08</span><span data-c="p1.mm">07</span><span data-c="p1.yy">26</span></div>
-      <h1 class="name" data-c="p1.name2">Екатерина</h1>
-      <div class="v-tick"></div>
-      <div class="details">
-        <div class="when" data-c="p1.when">среда · 16:30</div>
-        <div class="place"><span data-c="p1.place1">Дворец бракосочетания</span><br /><span data-c="p1.place2">ул. Карла Либкнехта, д. 3</span></div>
-      </div>
-      <p class="welcome" data-c="p1.welcome">Будем счастливы разделить этот день с вами</p>
-      <div class="monogram">А<span class="slash">/</span>Е</div>
+      <h1 class="name name-right" data-c="p1.name2">Екатерина</h1>
     </div>
   </section>
 
