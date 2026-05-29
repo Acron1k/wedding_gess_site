@@ -1,0 +1,6 @@
+{
+  "private": true,
+  "name": "wedding-gess-site",
+  "version": "1.0.0",
+  "description": "Свадебное приглашение Алексея и Екатерины — статический сайт + редактор текста на Vercel KV"
+}

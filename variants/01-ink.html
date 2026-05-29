@@ -176,17 +176,17 @@
   <section class="sheet">
     <div class="frame"></div>
     <div class="content hero">
-      <div class="eyebrow">Приглашение&nbsp;на&nbsp;свадьбу</div>
+      <div class="eyebrow" data-c="p1.eyebrow">Приглашение&nbsp;на&nbsp;свадьбу</div>
       <div class="v-tick"></div>
-      <h1 class="name">Алексей</h1>
-      <div class="date-stack"><span>08</span><span>07</span><span>26</span></div>
-      <h1 class="name">Екатерина</h1>
+      <h1 class="name" data-c="p1.name1">Алексей</h1>
+      <div class="date-stack"><span data-c="p1.dd">08</span><span data-c="p1.mm">07</span><span data-c="p1.yy">26</span></div>
+      <h1 class="name" data-c="p1.name2">Екатерина</h1>
       <div class="v-tick"></div>
       <div class="details">
-        <div class="when">среда · 16:30</div>
-        <div class="place">Дворец бракосочетания<br />ул. Карла Либкнехта, д. 3</div>
+        <div class="when" data-c="p1.when">среда · 16:30</div>
+        <div class="place"><span data-c="p1.place1">Дворец бракосочетания</span><br /><span data-c="p1.place2">ул. Карла Либкнехта, д. 3</span></div>
       </div>
-      <p class="welcome">Будем счастливы разделить этот день с вами</p>
+      <p class="welcome" data-c="p1.welcome">Будем счастливы разделить этот день с вами</p>
       <div class="monogram">А<span class="slash">/</span>Е</div>
     </div>
   </section>
@@ -195,34 +195,34 @@
     <div class="frame"></div>
     <div class="content invite">
       <div class="monogram-top">А&nbsp;·&nbsp;Е</div>
-      <h2 class="heading">Дорогие&nbsp;гости!</h2>
-      <p class="lede">
+      <h2 class="heading" data-c="p2.heading">Дорогие&nbsp;гости!</h2>
+      <p class="lede" data-c="p2.lede">
         Приглашаем вас на самый важный день в нашей жизни&nbsp;— нашу свадьбу!
       </p>
       <div class="ornament"></div>
-      <div class="date-line">8 июля 2026</div>
+      <div class="date-line" data-c="p2.dateLine">8 июля 2026</div>
       <div class="events">
         <div class="event">
-          <div class="event-label">Торжественная регистрация</div>
-          <div class="event-time">16:30</div>
-          <div class="event-place">Дворец бракосочетания<br />г. Екатеринбург, ул. Карла Либкнехта, 3</div>
+          <div class="event-label" data-c="p2.e1label">Торжественная регистрация</div>
+          <div class="event-time" data-c="p2.e1time">16:30</div>
+          <div class="event-place"><span data-c="p2.e1place1">Дворец бракосочетания</span><br /><span data-c="p2.e1place2">г. Екатеринбург, ул. Карла Либкнехта, 3</span></div>
         </div>
         <div class="event-sep"></div>
         <div class="event">
-          <div class="event-label">Праздничный банкет</div>
-          <div class="event-time">17:30</div>
-          <div class="event-place">Ресторан «Честертон»<br />г. Екатеринбург, ул. Радищева, 33</div>
+          <div class="event-label" data-c="p2.e2label">Праздничный банкет</div>
+          <div class="event-time" data-c="p2.e2time">17:30</div>
+          <div class="event-place"><span data-c="p2.e2place1">Ресторан «Честертон»</span><br /><span data-c="p2.e2place2">г. Екатеринбург, ул. Радищева, 33</span></div>
         </div>
       </div>
       <div class="block">
-        <div class="label">Примечание</div>
-        <div class="text">Дресс-кода нет, но будем благодарны, если ваша одежда будет в рамках приличия.</div>
+        <div class="label" data-c="p2.noteLabel">Примечание</div>
+        <div class="text" data-c="p2.noteText">Дресс-кода нет, но будем благодарны, если ваша одежда будет в рамках приличия.</div>
       </div>
       <div class="block">
-        <div class="label">Подтверждение</div>
-        <div class="text">Пожалуйста, подтвердите своё присутствие до 10 июня 2026 года.</div>
+        <div class="label" data-c="p2.rsvpLabel">Подтверждение</div>
+        <div class="text" data-c="p2.rsvpText">Пожалуйста, подтвердите своё присутствие до 10 июня 2026 года.</div>
       </div>
-      <p class="closing">Ждём вас</p>
+      <p class="closing" data-c="p2.closing">Ждём вас</p>
     </div>
   </section>
 
@@ -232,6 +232,9 @@
   <a href="../index.html">← Все варианты</a>
   <button onclick="window.print()">Скачать PDF / Печать</button>
 </div>
+
+<script src="../content.js"></script>
+<script src="../render.js"></script>
 
 </body>
 </html>

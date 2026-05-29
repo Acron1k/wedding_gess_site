@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Редактор приглашения · Алексей и Екатерина</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Lora:wght@400;500&display=swap" rel="stylesheet" />
+<script src="content.js"></script>
+<style>
+  :root {
+    --paper: #f3efe6; --ink: #211f1b; --ink-soft: #57534a; --ink-faint: #938d80;
+    --rule: rgba(33,31,27,0.16); --accent: #8a6a3b;
+    --display: 'Cormorant Garamond', Georgia, serif; --body: 'Lora', Georgia, serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #e7e1d4; color: var(--ink); font-family: var(--body); line-height: 1.5; }
+
+  .layout { display: grid; grid-template-columns: minmax(360px, 1fr) minmax(420px, 560px); min-height: 100vh; }
+  @media (max-width: 900px) { .layout { grid-template-columns: 1fr; } }
+
+  /* ---------- left: form ---------- */
+  .panel { padding: 34px 32px 80px; overflow-y: auto; max-height: 100vh; }
+  .panel h1 { font-family: var(--display); font-weight: 500; font-size: 30px; letter-spacing: 0.02em; }
+  .panel .sub { color: var(--ink-soft); font-size: 13.5px; margin-top: 6px; margin-bottom: 22px; }
+
+  .section { margin-bottom: 26px; }
+  .section > h2 {
+    font-family: var(--display); font-weight: 600; font-size: 14px; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 12px; padding-bottom: 7px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .field { margin-bottom: 13px; }
+  .field label { display: block; font-size: 12px; color: var(--ink-faint); letter-spacing: 0.03em; margin-bottom: 4px; }
+  .field input, .field textarea {
+    width: 100%; font-family: var(--body); font-size: 14px; color: var(--ink);
+    background: #fbf9f4; border: 1px solid var(--rule); border-radius: 7px; padding: 9px 11px;
+    transition: border-color 0.15s ease;
+  }
+  .field input:focus, .field textarea:focus { outline: none; border-color: var(--accent); }
+  .field textarea { resize: vertical; min-height: 58px; line-height: 1.45; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+
+  /* ---------- right: preview + controls ---------- */
+  .preview { background: #d8d2c6; position: sticky; top: 0; height: 100vh; display: flex; flex-direction: column; }
+  .controls {
+    padding: 16px 20px; background: var(--paper); border-bottom: 1px solid var(--rule);
+    display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+  }
+  .controls .vrow { display: flex; gap: 8px; align-items: center; width: 100%; }
+  .controls select {
+    font-family: var(--body); font-size: 14px; padding: 8px 12px; border-radius: 7px;
+    border: 1px solid var(--rule); background: #fbf9f4; color: var(--ink); flex: 1;
+  }
+  .btn {
+    font-family: var(--body); font-size: 13px; letter-spacing: 0.02em; cursor: pointer;
+    border: 1px solid var(--ink); background: var(--ink); color: var(--paper);
+    padding: 9px 16px; border-radius: 999px; text-decoration: none; white-space: nowrap;
+    transition: opacity 0.15s ease, transform 0.15s ease;
+  }
+  .btn:hover { transform: translateY(-1px); }
+  .btn.ghost { background: transparent; color: var(--ink); }
+  .btn.accent { background: var(--accent); border-color: var(--accent); }
+  .pwd {
+    font-family: var(--body); font-size: 13px; padding: 8px 11px; border-radius: 7px;
+    border: 1px solid var(--rule); background: #fbf9f4; color: var(--ink); width: 150px;
+  }
+  .status { font-size: 12.5px; color: var(--ink-soft); margin-left: auto; min-height: 16px; }
+  .status.ok { color: #3f7d4f; }
+  .status.err { color: #b1492f; }
+
+  .stage { flex: 1; overflow: auto; display: flex; justify-content: center; padding: 22px 0; }
+  .scaler { width: 794px; transform-origin: top center; }
+  iframe.preview-frame { width: 794px; height: 2350px; border: 0; background: #fff; box-shadow: 0 14px 40px rgba(40,34,24,0.22); }
+
+  .hint { font-size: 12px; color: var(--ink-faint); padding: 0 20px 12px; background: var(--paper); }
+</style>
+</head>
+<body>
+<div class="layout">
+
+  <!-- LEFT: form -->
+  <div class="panel">
+    <h1>Текст приглашения</h1>
+    <p class="sub">Меняйте поля — справа сразу видно результат. Когда всё нравится, нажмите «Сохранить» (нужен пароль) — гости увидят новый текст по своей ссылке.</p>
+    <div id="form"></div>
+  </div>
+
+  <!-- RIGHT: preview -->
+  <div class="preview">
+    <div class="controls">
+      <div class="vrow">
+        <select id="variant" title="Вариант оформления">
+          <option value="01-ink">01 · Ink (чернила)</option>
+          <option value="02-gold">02 · Gold (золото)</option>
+          <option value="03-sage">03 · Sage (зелёный)</option>
+          <option value="04-terracotta">04 · Terracotta</option>
+        </select>
+        <button class="btn accent" id="save">Сохранить</button>
+      </div>
+      <div class="vrow">
+        <input class="pwd" id="pwd" type="password" placeholder="Пароль" autocomplete="off" />
+        <button class="btn ghost" id="pdf">Скачать PDF</button>
+        <button class="btn ghost" id="share">Ссылка гостям</button>
+        <span class="status" id="status"></span>
+      </div>
+    </div>
+    <div class="stage">
+      <div class="scaler" id="scaler">
+        <iframe class="preview-frame" id="frame" title="Превью"></iframe>
+      </div>
+    </div>
+    <div class="hint">«Скачать PDF» — печать текущего варианта (Сохранить как PDF, A4, поля «Нет»). «Ссылка гостям» копирует адрес сайта для рассылки.</div>
+  </div>
+
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  // ---- описание полей формы ----
+  var SECTIONS = [
+    { title: "Страница 1 — обложка", fields: [
+      { key: "p1.eyebrow",  label: "Надпись сверху", type: "text" },
+      { key: "p1.name1",    label: "Имя 1",          type: "text" },
+      { key: "p1.name2",    label: "Имя 2",          type: "text" },
+      { key: "__date",      label: "Дата крупно (день / месяц / год)", type: "date3" },
+      { key: "p1.when",     label: "День недели и время", type: "text" },
+      { key: "p1.place1",   label: "Место — строка 1", type: "text" },
+      { key: "p1.place2",   label: "Место — строка 2", type: "text" },
+      { key: "p1.welcome",  label: "Тёплая строка",   type: "text" }
+    ]},
+    { title: "Страница 2 — приглашение", fields: [
+      { key: "p2.heading",  label: "Заголовок",       type: "text" },
+      { key: "p2.lede",     label: "Вступление",      type: "textarea" },
+      { key: "p2.dateLine", label: "Дата строкой",    type: "text" }
+    ]},
+    { title: "Событие 1", fields: [
+      { key: "p2.e1label",  label: "Название",        type: "text" },
+      { key: "p2.e1time",   label: "Время",           type: "text" },
+      { key: "p2.e1place1", label: "Место — строка 1", type: "text" },
+      { key: "p2.e1place2", label: "Место — строка 2", type: "text" }
+    ]},
+    { title: "Событие 2", fields: [
+      { key: "p2.e2label",  label: "Название",        type: "text" },
+      { key: "p2.e2time",   label: "Время",           type: "text" },
+      { key: "p2.e2place1", label: "Место — строка 1", type: "text" },
+      { key: "p2.e2place2", label: "Место — строка 2", type: "text" }
+    ]},
+    { title: "Примечание и подтверждение", fields: [
+      { key: "p2.noteLabel", label: "Заголовок примечания", type: "text" },
+      { key: "p2.noteText",  label: "Текст примечания",     type: "textarea" },
+      { key: "p2.rsvpLabel", label: "Заголовок подтверждения", type: "text" },
+      { key: "p2.rsvpText",  label: "Текст подтверждения",  type: "textarea" },
+      { key: "p2.closing",   label: "Финальная строка",     type: "text" }
+    ]}
+  ];
+
+  var defaults = window.DEFAULT_CONTENT || {};
+  var content = clone(defaults);
+
+  function clone(o) { return JSON.parse(JSON.stringify(o)); }
+  function get(obj, path) { return path.split(".").reduce(function (o, k) { return o && o[k] != null ? o[k] : ""; }, obj); }
+  function set(obj, path, val) {
+    var parts = path.split("."), o = obj;
+    for (var i = 0; i < parts.length - 1; i++) { if (!o[parts[i]]) o[parts[i]] = {}; o = o[parts[i]]; }
+    o[parts[parts.length - 1]] = val;
+  }
+
+  // ---- построить форму ----
+  var formEl = document.getElementById("form");
+  SECTIONS.forEach(function (sec) {
+    var s = document.createElement("div"); s.className = "section";
+    var h = document.createElement("h2"); h.textContent = sec.title; s.appendChild(h);
+    sec.fields.forEach(function (f) {
+      var wrap = document.createElement("div"); wrap.className = "field";
+      var lab = document.createElement("label"); lab.textContent = f.label; wrap.appendChild(lab);
+
+      if (f.type === "date3") {
+        var g = document.createElement("div"); g.className = "grid3";
+        ["dd", "mm", "yy"].forEach(function (k) {
+          var inp = document.createElement("input");
+          inp.value = get(content, "p1." + k); inp.maxLength = 2;
+          inp.addEventListener("input", function () { set(content, "p1." + k, inp.value); push(); });
+          g.appendChild(inp);
+        });
+        wrap.appendChild(g);
+      } else {
+        var inp = f.type === "textarea" ? document.createElement("textarea") : document.createElement("input");
+        inp.value = get(content, f.key);
+        inp.dataset.key = f.key;
+        inp.addEventListener("input", function () { set(content, f.key, inp.value); push(); });
+        wrap.appendChild(inp);
+      }
+      s.appendChild(wrap);
+    });
+    formEl.appendChild(s);
+  });
+
+  // ---- превью ----
+  var frame = document.getElementById("frame");
+  var variantSel = document.getElementById("variant");
+  var statusEl = document.getElementById("status");
+  var pushTimer = null;
+
+  function variantFile() { return "variants/" + variantSel.value + ".html"; }
+
+  function loadFrame() {
+    content.variant = variantSel.value;
+    frame.src = variantFile();
+  }
+  frame.addEventListener("load", function () { push(true); });
+
+  function push(immediate) {
+    clearTimeout(pushTimer);
+    pushTimer = setTimeout(function () {
+      if (frame.contentWindow) {
+        frame.contentWindow.postMessage({ type: "wedding-preview", content: content }, "*");
+      }
+    }, immediate ? 0 : 120);
+  }
+
+  // масштаб превью под ширину колонки
+  function rescale() {
+    var stage = document.querySelector(".stage");
+    var scaler = document.getElementById("scaler");
+    var avail = stage.clientWidth - 24;
+    var scale = Math.min(1, avail / 794);
+    scaler.style.transform = "scale(" + scale + ")";
+    scaler.style.height = (2350 * scale) + "px";
+  }
+  window.addEventListener("resize", rescale);
+
+  variantSel.addEventListener("change", loadFrame);
+
+  // ---- кнопки ----
+  function setStatus(msg, kind) {
+    statusEl.textContent = msg;
+    statusEl.className = "status" + (kind ? " " + kind : "");
+  }
+
+  document.getElementById("pdf").addEventListener("click", function () {
+    if (frame.contentWindow) frame.contentWindow.print();
+  });
+
+  document.getElementById("share").addEventListener("click", function () {
+    var url = location.origin + "/" + variantFile();
+    navigator.clipboard.writeText(url).then(
+      function () { setStatus("Ссылка скопирована: " + url, "ok"); },
+      function () { setStatus(url, ""); }
+    );
+  });
+
+  document.getElementById("save").addEventListener("click", function () {
+    var pwd = document.getElementById("pwd").value;
+    if (!pwd) { setStatus("Введите пароль", "err"); return; }
+    setStatus("Сохраняю…", "");
+    content.variant = variantSel.value;
+    fetch("/api/content", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ password: pwd, content: content })
+    }).then(function (r) {
+      return r.json().then(function (d) { return { ok: r.ok, d: d }; });
+    }).then(function (res) {
+      if (res.ok) setStatus("Сохранено ✓ Гости видят новый текст.", "ok");
+      else setStatus(res.d.error || "Ошибка сохранения", "err");
+    }).catch(function (e) { setStatus("Сеть недоступна: " + e.message, "err"); });
+  });
+
+  // ---- старт: подтянуть сохранённый текст из БД ----
+  function start(initial) {
+    if (initial && typeof initial === "object") content = mergeInto(clone(defaults), initial);
+    if (content.variant) variantSel.value = content.variant;
+    // заполнить поля значениями
+    var inputs = formEl.querySelectorAll("[data-key]");
+    inputs.forEach(function (i) { i.value = get(content, i.dataset.key); });
+    var g = formEl.querySelectorAll(".grid3 input");
+    ["dd", "mm", "yy"].forEach(function (k, idx) { if (g[idx]) g[idx].value = get(content, "p1." + k); });
+    loadFrame();
+    rescale();
+  }
+  function mergeInto(a, b) {
+    for (var k in b) {
+      if (b[k] && typeof b[k] === "object" && !Array.isArray(b[k])) a[k] = mergeInto(a[k] || {}, b[k]);
+      else a[k] = b[k];
+    }
+    return a;
+  }
+
+  if (typeof fetch === "function") {
+    fetch("/api/content").then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (data) { start(data && data.content); })
+      .catch(function () { start(null); });
+  } else {
+    start(null);
+  }
+})();
+</script>
+</body>
+</html>
