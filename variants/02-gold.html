@@ -51,16 +51,20 @@
   /* ---------- PAGE 1 ---------- */
   .hero { align-items: stretch; justify-content: center; text-align: center; }
 
+  .spine { position: absolute; left: 50%; transform: translateX(-50%); width: 1px; background: var(--ink); opacity: 0.5; }
+  .spine-top    { top: 15mm;    height: 32mm; }
+  .spine-bottom { bottom: 15mm; height: 32mm; }
+
   .name {
-    font-family: var(--display); font-weight: 400; font-size: 72px; letter-spacing: 0.03em;
+    font-family: var(--display); font-weight: 400; font-size: 84px; letter-spacing: 0.04em;
     color: var(--ink); margin: 0;
   }
-  .name-left  { text-align: left;  align-self: flex-start; margin-bottom: -6mm; }
-  .name-right { text-align: right; align-self: flex-end;   margin-top: -6mm; }
+  .name-left  { text-align: left;  align-self: flex-start; margin-bottom: -4mm; }
+  .name-right { text-align: right; align-self: flex-end;   margin-top: -4mm; }
 
   .date-stack {
-    font-family: var(--display); font-weight: 400; font-size: 122px; line-height: 0.94;
-    letter-spacing: 0.02em; color: var(--ink); margin: 0; text-align: center;
+    font-family: var(--display); font-weight: 400; font-size: 152px; line-height: 0.92;
+    letter-spacing: 0.01em; color: var(--ink); margin: 0; text-align: center;
   }
   .date-stack span { display: block; }
 
@@ -145,9 +149,11 @@
   <section class="sheet">
     <div class="frame"></div>
     <div class="content hero">
+      <span class="spine spine-top"></span>
       <h1 class="name name-left" data-c="p1.name1">Алексей</h1>
       <div class="date-stack"><span data-c="p1.dd">08</span><span data-c="p1.mm">07</span><span data-c="p1.yy">26</span></div>
       <h1 class="name name-right" data-c="p1.name2">Екатерина</h1>
+      <span class="spine spine-bottom"></span>
     </div>
   </section>
 
