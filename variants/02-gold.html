@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Алексей и Екатерина — 08.07.2026 · Gold</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Forum&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --paper: #f6f1e7;
+    --ink: #2b2722;
+    --ink-soft: #565047;
+    --ink-faint: #9a8f7c;
+    --accent: #a9894f;
+    --rule: rgba(169, 137, 79, 0.45);
+    --display: 'Forum', Georgia, serif;
+    --body: 'PT Serif', Georgia, serif;
+    --sheet-w: 210mm;
+    --sheet-h: 297mm;
+    --pad: 18mm;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    background: #d9d2c4; font-family: var(--body); color: var(--ink); line-height: 1.6;
+    -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+  }
+
+  .stage { display: flex; flex-direction: column; align-items: center; gap: 14mm; padding: 16mm 6mm 24mm; }
+
+  .sheet {
+    position: relative; width: var(--sheet-w); height: var(--sheet-h);
+    background: var(--paper); color: var(--ink); overflow: hidden;
+    box-shadow: 0 18px 50px rgba(40, 34, 24, 0.28); display: flex; flex-direction: column;
+  }
+  .sheet::before {
+    content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0.5;
+    background-image: radial-gradient(rgba(0,0,0,0.022) 1px, transparent 1px);
+    background-size: 4px 4px; mix-blend-mode: multiply;
+  }
+
+  .frame { position: absolute; inset: 11mm; border: 1px solid var(--rule); pointer-events: none; }
+  .frame::after { content: ""; position: absolute; inset: 2.2mm; border: 1px solid rgba(169,137,79,0.25); }
+
+  .content { position: relative; z-index: 1; flex: 1; display: flex; flex-direction: column; padding: var(--pad); }
+
+  /* ---------- PAGE 1 ---------- */
+  .hero { align-items: center; justify-content: center; text-align: center; }
+  .eyebrow {
+    font-family: var(--body); font-size: 10.5px; letter-spacing: 0.5em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 8mm; padding-left: 0.5em;
+  }
+  .v-tick { width: 1px; height: 32px; background: var(--accent); opacity: 0.7; margin: 0 auto; }
+
+  .name {
+    font-family: var(--display); font-weight: 400; font-size: 46px; letter-spacing: 0.1em;
+    color: var(--ink); padding-left: 0.1em; margin: 5mm 0;
+  }
+
+  .date-stack {
+    font-family: var(--display); font-weight: 400; font-size: 98px; line-height: 0.96;
+    letter-spacing: 0.04em; color: var(--ink); margin: 0;
+  }
+  .date-stack span { display: block; }
+
+  .details { margin-top: 8mm; color: var(--ink-soft); }
+  .details .when {
+    font-family: var(--display); font-size: 23px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 4mm; padding-left: 0.16em;
+  }
+  .details .place { font-size: 14px; letter-spacing: 0.04em; line-height: 1.75; }
+
+  .welcome {
+    font-family: var(--body); font-style: italic; font-weight: 400; font-size: 18px;
+    color: var(--ink-soft); margin-top: 9mm; max-width: 80%; line-height: 1.55;
+  }
+
+  .monogram { font-family: var(--display); font-weight: 400; letter-spacing: 0.18em; color: var(--accent); }
+  .hero .monogram { margin-top: 9mm; font-size: 23px; }
+  .hero .monogram .slash { opacity: 0.7; margin: 0 5px; }
+
+  /* ---------- PAGE 2 ---------- */
+  .invite { align-items: center; text-align: center; justify-content: flex-start; padding-top: 12mm; }
+  .invite .monogram-top {
+    font-family: var(--display); font-size: 19px; letter-spacing: 0.32em; color: var(--accent);
+    margin-bottom: 8mm; padding-left: 0.32em;
+  }
+
+  .heading {
+    font-family: var(--display); font-weight: 400; font-size: 52px; letter-spacing: 0.03em;
+    color: var(--ink); line-height: 1.05; margin-bottom: 8mm;
+  }
+
+  .lede { font-size: 15px; line-height: 1.9; color: var(--ink-soft); max-width: 84%; margin: 0 auto; }
+
+  .ornament { width: 60px; height: 1px; background: var(--rule); margin: 7mm auto; position: relative; }
+  .ornament::before {
+    content: "✦"; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    background: var(--paper); color: var(--accent); font-size: 12px; padding: 0 8px;
+  }
+
+  .date-line {
+    font-family: var(--display); font-weight: 400; font-size: 32px; letter-spacing: 0.1em;
+    color: var(--ink); margin-bottom: 7mm;
+  }
+  .events { width: 100%; display: flex; flex-direction: column; align-items: center; }
+  .event-label {
+    font-family: var(--body); font-size: 11px; letter-spacing: 0.36em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 3mm; padding-left: 0.36em;
+  }
+  .event-time {
+    font-family: var(--display); font-size: 27px; letter-spacing: 0.08em; color: var(--ink); margin-bottom: 2.5mm;
+  }
+  .event-place { font-size: 13.5px; letter-spacing: 0.04em; line-height: 1.7; color: var(--ink-soft); }
+  .event-sep { width: 1px; height: 22px; background: var(--rule); margin: 6mm 0; }
+
+  .block { margin-top: 7mm; max-width: 80%; }
+  .block .label {
+    font-family: var(--body); font-size: 11px; letter-spacing: 0.42em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 3.5mm; padding-left: 0.42em;
+  }
+  .block .text { font-size: 14px; line-height: 1.8; color: var(--ink-soft); }
+  .block .contact { font-family: var(--body); font-size: 14.5px; letter-spacing: 0.12em; color: var(--ink); margin-top: 4mm; }
+
+  .closing {
+    font-family: var(--display); font-weight: 400; font-size: 46px; letter-spacing: 0.04em;
+    color: var(--ink); margin-top: auto; padding-top: 10mm;
+  }
+
+  /* ---------- screen chrome ---------- */
+  .toolbar { position: fixed; right: 18px; bottom: 18px; z-index: 50; display: flex; gap: 10px; }
+  .toolbar a, .toolbar button {
+    font-family: var(--body); font-size: 13px; letter-spacing: 0.04em; color: #fff; background: #2b2722;
+    border: none; padding: 11px 18px; border-radius: 999px; cursor: pointer; text-decoration: none;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.25); transition: transform 0.15s ease;
+  }
+  .toolbar a { background: #fff; color: #2b2722; }
+  .toolbar a:hover, .toolbar button:hover { transform: translateY(-2px); }
+
+  @media (max-width: 820px) {
+    .stage { padding: 6mm 0 14mm; }
+    .sheet { transform: scale(calc((100vw - 16px) / 794)); transform-origin: top center; }
+  }
+
+  @page { size: A4; margin: 0; }
+  @media print {
+    html, body { background: #fff; }
+    .toolbar { display: none !important; }
+    .stage { gap: 0; padding: 0; }
+    .sheet { box-shadow: none; width: 210mm; height: 297mm; page-break-after: always; break-after: page; }
+    .sheet:last-child { page-break-after: auto; break-after: auto; }
+    .sheet, .frame, .frame::after, .ornament::before { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+
+<div class="stage">
+
+  <section class="sheet">
+    <div class="frame"></div>
+    <div class="content hero">
+      <div class="eyebrow">Приглашение&nbsp;на&nbsp;свадьбу</div>
+      <div class="v-tick"></div>
+      <h1 class="name">Алексей</h1>
+      <div class="date-stack"><span>08</span><span>07</span><span>26</span></div>
+      <h1 class="name">Екатерина</h1>
+      <div class="v-tick"></div>
+      <div class="details">
+        <div class="when">среда · 16:30</div>
+        <div class="place">Дворец бракосочетания<br />ул. Карла Либкнехта, д. 3</div>
+      </div>
+      <p class="welcome">Будем счастливы разделить этот день с вами</p>
+      <div class="monogram">А<span class="slash">/</span>Е</div>
+    </div>
+  </section>
+
+  <section class="sheet">
+    <div class="frame"></div>
+    <div class="content invite">
+      <div class="monogram-top">А&nbsp;·&nbsp;Е</div>
+      <h2 class="heading">Дорогие&nbsp;гости!</h2>
+      <p class="lede">
+        Приглашаем вас на самый важный день в нашей жизни&nbsp;— нашу свадьбу!
+      </p>
+      <div class="ornament"></div>
+      <div class="date-line">8 июля 2026</div>
+      <div class="events">
+        <div class="event">
+          <div class="event-label">Торжественная регистрация</div>
+          <div class="event-time">16:30</div>
+          <div class="event-place">Дворец бракосочетания<br />г. Екатеринбург, ул. Карла Либкнехта, 3</div>
+        </div>
+        <div class="event-sep"></div>
+        <div class="event">
+          <div class="event-label">Праздничный банкет</div>
+          <div class="event-time">17:30</div>
+          <div class="event-place">Ресторан «Честертон»<br />г. Екатеринбург, ул. Радищева, 33</div>
+        </div>
+      </div>
+      <div class="block">
+        <div class="label">Примечание</div>
+        <div class="text">Дресс-кода нет, но будем благодарны, если ваша одежда будет в рамках приличия.</div>
+      </div>
+      <div class="block">
+        <div class="label">Подтверждение</div>
+        <div class="text">Пожалуйста, подтвердите своё присутствие до 10 июня 2026 года.</div>
+      </div>
+      <p class="closing">Ждём вас</p>
+    </div>
+  </section>
+
+</div>
+
+<div class="toolbar">
+  <a href="../index.html">← Все варианты</a>
+  <button onclick="window.print()">Скачать PDF / Печать</button>
+</div>
+
+</body>
+</html>

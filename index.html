@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Алексей и Екатерина — приглашение · выбор стиля</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Lora:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --paper: #f3efe6;
+    --ink: #211f1b;
+    --ink-soft: #57534a;
+    --ink-faint: #938d80;
+    --rule: rgba(33, 31, 27, 0.16);
+    --display: 'Cormorant Garamond', Georgia, serif;
+    --body: 'Lora', Georgia, serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #e7e1d4;
+    color: var(--ink);
+    font-family: var(--body);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 64px 28px 80px; }
+
+  header { text-align: center; margin-bottom: 56px; }
+  .eyebrow {
+    font-size: 12px; letter-spacing: 0.5em; text-transform: uppercase; color: var(--ink-faint);
+    padding-left: 0.5em; margin-bottom: 18px;
+  }
+  header h1 {
+    font-family: var(--display); font-weight: 400; font-size: 58px; letter-spacing: 0.04em; line-height: 1.1;
+  }
+  header h1 .amp { font-style: italic; color: var(--ink-faint); }
+  header .meta {
+    font-family: var(--display); font-size: 22px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--ink-soft); margin-top: 14px; padding-left: 0.14em;
+  }
+  header .lead { color: var(--ink-soft); font-size: 15px; max-width: 560px; margin: 22px auto 0; }
+
+  .grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 36px;
+  }
+  @media (max-width: 760px) { .grid { grid-template-columns: 1fr; } }
+
+  .card {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    box-shadow: 0 14px 40px rgba(40, 34, 24, 0.16);
+    overflow: hidden;
+    display: flex; flex-direction: column;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .card:hover { transform: translateY(-4px); box-shadow: 0 22px 56px rgba(40, 34, 24, 0.24); }
+
+  .thumb {
+    position: relative;
+    height: 360px;
+    overflow: hidden;
+    border-bottom: 1px solid var(--rule);
+    background: #f3efe6;
+  }
+  .thumb iframe {
+    width: 794px; height: 1123px; border: 0;
+    transform: scale(0.46); transform-origin: top left;
+    pointer-events: none;
+  }
+  .thumb .veil { position: absolute; inset: 0; }
+
+  .card-body { padding: 22px 24px 26px; display: flex; flex-direction: column; gap: 6px; }
+  .card-body .num {
+    font-family: var(--display); font-size: 13px; letter-spacing: 0.3em; color: var(--ink-faint);
+  }
+  .card-body h2 {
+    font-family: var(--display); font-weight: 500; font-size: 30px; letter-spacing: 0.02em;
+  }
+  .card-body .desc { font-size: 14px; color: var(--ink-soft); }
+  .card-body .fonts {
+    font-size: 12px; letter-spacing: 0.04em; color: var(--ink-faint); margin-top: 2px;
+  }
+
+  .swatches { display: flex; gap: 8px; margin-top: 12px; }
+  .sw { width: 22px; height: 22px; border-radius: 50%; border: 1px solid rgba(0,0,0,0.08); }
+
+  .card a.open {
+    margin-top: 16px;
+    align-self: flex-start;
+    font-family: var(--body); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--paper); background: var(--ink); text-decoration: none;
+    padding: 11px 22px; border-radius: 999px;
+    transition: opacity 0.15s ease;
+  }
+  .card a.open:hover { opacity: 0.84; }
+
+  footer {
+    margin-top: 64px; text-align: center; color: var(--ink-faint); font-size: 13px; line-height: 1.9;
+  }
+  footer .tip { font-family: var(--display); font-size: 17px; color: var(--ink-soft); letter-spacing: 0.02em; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="eyebrow">Приглашение на свадьбу</div>
+    <h1>Алексей <span class="amp">&amp;</span> Екатерина</h1>
+    <div class="meta">8 июля 2026 · 16:30</div>
+    <p class="lead">
+      Четыре стилевых варианта приглашения. Откройте любой, чтобы посмотреть обе
+      страницы целиком и сохранить в PDF (Ctrl&nbsp;+&nbsp;P → «Сохранить как PDF», формат&nbsp;A4).
+    </p>
+  </header>
+
+  <div class="grid">
+
+    <article class="card">
+      <div class="thumb"><iframe src="variants/01-ink.html" scrolling="no" title="Ink"></iframe><span class="veil"></span></div>
+      <div class="card-body">
+        <span class="num">01</span>
+        <h2>Ink</h2>
+        <div class="desc">Айвори + чернила. Минимал-эдиториал, максимально близко к референсу.</div>
+        <div class="fonts">Cormorant Garamond · Lora</div>
+        <div class="swatches">
+          <span class="sw" style="background:#f3efe6"></span>
+          <span class="sw" style="background:#211f1b"></span>
+          <span class="sw" style="background:#938d80"></span>
+        </div>
+        <a class="open" href="variants/01-ink.html">Открыть →</a>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="thumb"><iframe src="variants/02-gold.html" scrolling="no" title="Gold"></iframe><span class="veil"></span></div>
+      <div class="card-body">
+        <span class="num">02</span>
+        <h2>Gold</h2>
+        <div class="desc">Айвори + приглушённое золото. Премиум-дворцовая подача, двойная рамка.</div>
+        <div class="fonts">Forum · PT Serif</div>
+        <div class="swatches">
+          <span class="sw" style="background:#f6f1e7"></span>
+          <span class="sw" style="background:#a9894f"></span>
+          <span class="sw" style="background:#2b2722"></span>
+        </div>
+        <a class="open" href="variants/02-gold.html">Открыть →</a>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="thumb"><iframe src="variants/03-sage.html" scrolling="no" title="Sage"></iframe><span class="veil"></span></div>
+      <div class="card-body">
+        <span class="num">03</span>
+        <h2>Sage</h2>
+        <div class="desc">Тёплый беж + пыльная зелень. Рукописные акценты, ботаническая нота.</div>
+        <div class="fonts">Cormorant Garamond · Marck Script</div>
+        <div class="swatches">
+          <span class="sw" style="background:#eef0e7"></span>
+          <span class="sw" style="background:#79885f"></span>
+          <span class="sw" style="background:#2f342b"></span>
+        </div>
+        <a class="open" href="variants/03-sage.html">Открыть →</a>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="thumb"><iframe src="variants/04-terracotta.html" scrolling="no" title="Terracotta"></iframe><span class="veil"></span></div>
+      <div class="card-body">
+        <span class="num">04</span>
+        <h2>Terracotta</h2>
+        <div class="desc">Тёплый беж + терракота. Живой рукописный акцент, перекликается с красным текстом референса.</div>
+        <div class="fonts">Cormorant Garamond · Caveat</div>
+        <div class="swatches">
+          <span class="sw" style="background:#f4ece1"></span>
+          <span class="sw" style="background:#b15c43"></span>
+          <span class="sw" style="background:#3a2f28"></span>
+        </div>
+        <a class="open" href="variants/04-terracotta.html">Открыть →</a>
+      </div>
+    </article>
+
+  </div>
+
+  <footer>
+    <p class="tip">Печать в PDF: откройте вариант → Ctrl + P → «Сохранить как PDF» → размер A4, поля «Нет».</p>
+    <p>Каждый вариант — две страницы A4: обложка с датой и текст-приглашение.</p>
+  </footer>
+
+</div>
+</body>
+</html>
